@@ -1,0 +1,101 @@
+Stopwatch {
+    background: $boost;
+    height: 5;
+    margin: 1;
+    min-width: 50;
+    padding: 1;
+}
+
+TimeDisplay {
+    text-align: center;
+    color: $foreground-muted;
+    height: 3;
+}
+
+Button {
+    width: 16;
+}
+
+#start {
+    dock: left;
+}
+
+#stop {
+    dock: left;
+    display: none;
+}
+
+#reset {
+    dock: right;
+}
+
+#header {
+
+    content-align: center middle;
+    background: rgb(128, 10, 10);
+    height: 3;
+    border: double rgb(200, 150, 0);
+    width: 100%;
+    text-style: bold;
+}
+
+
+Input {
+
+    align: center middle;
+    margin: 1 2;
+
+    color: $text;
+    border: double rgb(200, 150, 0);
+    text-align: center;
+
+}
+
+Messages {
+    width: 100%;
+    height: 3;
+    layout: horizontal;
+}
+
+#input {
+    width: 1fr;
+    height: 3;
+    text-align: left;
+    margin: 2;
+}
+
+#cash {
+    width: 1fr;
+    height: 3;
+    text-align: right;
+    margin: 2;
+}
+
+#game-container {
+    width: 100%;
+    height: 100%;
+    align: center middle;
+}
+
+#games {
+
+    height: auto;
+
+    grid-size: 2 4;
+    grid-gutter: 1 1;
+
+     margin: 2 2;
+     padding: 1 1;
+     border: solid rgb(200, 150, 0);
+}
+
+.button {
+    width: 100%;
+    height: 5;
+
+    padding: 2 2;
+    color: white;
+    border: none;
+    background: rgb(128, 10, 10);
+
+}
