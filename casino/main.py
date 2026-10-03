@@ -35,7 +35,7 @@ ALL_GAMES = list(GAME_HANDLERS.keys())
 
 
 class AllGames(Grid):
-
+# all of the button widgets, to add another: duplicate Button() and change label and id
     def compose(self) -> ComposeResult:
         yield Button(label="Blackjack (U.S.)", classes="button", id="bjUS")
         yield Button(label="Blackjack (E.U.)", classes="button", id="bjEU")
@@ -44,13 +44,13 @@ class AllGames(Grid):
         yield Button(label="Roulette", classes="button", id="roulette")
         yield Button(label="European Roulette", classes="button", id="eurorou")
         yield Button(label="Uno", classes="button", id="uno")
-
+# exits textual window and updates SELECTED_GAME variable
     def on_button_pressed(self, event: Button.Pressed) -> None:
         global SELECTED_GAME
         SELECTED_GAME = str(event.button.id)
         self.app.exit()
 
-
+# displays welcome and cash header
 class Messages(Horizontal):
 
     def compose(self) -> ComposeResult:
@@ -66,25 +66,27 @@ class CasinoHeader(HorizontalGroup):
 
 
 class CasinoApp(App):
+
     CSS_PATH = "assets/styles.tcss"
+    # different keybinds for certain actions
     BINDINGS = [
         ("q", "quit", "Quit")
     ]
 
     def compose(self) -> ComposeResult:
         yield Footer()
-        yield CasinoHeader()  # add check to see if already logged in, then skip over
+        yield CasinoHeader()
         global USER_NAME
-        if not USER_NAME:
+        if not USER_NAME: # check if user already logged in/added name
             yield Input(placeholder="Enter your name:")
         else:
             yield Messages()
             yield VerticalScroll(AllGames(id="games"), id="games-container")
-
+# if not logged in, take in input for name
     def on_input_submitted(self, event: Input.Submitted) -> None:
         global USER_NAME, ACCOUNT_STARTING_BALANCE, ACCOUNT, CONFIG, CTX
         USER_NAME = event.value.strip()
-        if USER_NAME:
+        if USER_NAME: # check if name entered was not empty
             ACCOUNT = Account.generate(USER_NAME, ACCOUNT_STARTING_BALANCE)
             self.mount(Messages())
             event.input.remove()
@@ -105,7 +107,7 @@ def main() -> None:
         app = CasinoApp()
         app.run()
 
-        if SELECTED_GAME:
+        if SELECTED_GAME: 
             handler = GAME_HANDLERS.get(SELECTED_GAME)
 
             if handler:
